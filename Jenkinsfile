@@ -15,27 +15,26 @@ pipeline {
 
     stages {
 
-        //
+        //Building Docker images
         stage('Docker Build'){
-            step{
+            steps{
                 script{
                     dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-                    
                 }
                 echo "Image name = ${IMAGE_REPO_NAME}"
             }
         }
 
-        //
+        //Upload images to ECR
         stage('Push to ECR'){
-            step{
+            steps{
 
             }
         }
         
-        //
+        //Deploy images to EC2 Instance
         stage('Deploy Script on EC2'){
-            step{
+            steps{
 
             }
         }
