@@ -20,7 +20,9 @@ pipeline {
             step{
                 script{
                     dockerImage = docker.build "${IMAGE_REPO_NAME}:${IMAGE_TAG}"
+                    
                 }
+                echo "Image name = ${IMAGE_REPO_NAME}"
             }
         }
 
