@@ -26,17 +26,17 @@ pipeline {
         }
 
         //Upload images to ECR
-        stage('Push to ECR'){
-            steps{
+        //stage('Push to ECR'){
+            //steps{
 
-            }
-        }
+            //}
+        //}
         
         //Deploy images to EC2 Instance
-        stage('Deploy Script on EC2'){
-            steps{
+        //stage('Deploy Script on EC2'){
+            //steps{
 
-            }
-        }
+            //}
+        //}
     }
 }    
