@@ -43,6 +43,7 @@ pipeline {
                     sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
                     sh 'ssh -o StrictHostKeyChecking=no ubuntu@18.182.25.165'
                     sh 'whoami'
+                    sh 'pwd'
                 }
             }
         }
