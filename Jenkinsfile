@@ -39,7 +39,7 @@ pipeline {
         //SSH connect to ec2 instance
         stage('ssh to ec2') {
             steps {
-                sh 'sed -i "s#IMAGE_TAG#$IMAGE_TAG#g"'
+                sh 'sed -i "s#IMAGE_TAG#$IMAGE_TAG#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
                     sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
                     sh "ssh ubuntu@18.182.25.165 'sudo apt update -y && \
