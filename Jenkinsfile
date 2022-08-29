@@ -41,10 +41,10 @@ pipeline {
             steps {
                 sshagent (credentials: ['ssh-ec2']) {
                     sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
-                    ssh ubuntu@18.182.25.165 /bin/bash <<'EOT'
+                    sh '''ssh ubuntu@18.182.25.165 /bin/bash <<'EOT'
                     echo "These commands will be run on: $( uname -a )"
                     echo "They are executed by: $( whoami )"
-                    EOT
+                    EOT'''
                 }
             }
         }
