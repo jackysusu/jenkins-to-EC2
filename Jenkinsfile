@@ -44,6 +44,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no -l ubuntu 18.182.25.165'
                     sh 'whoami'
                     sh 'pwd'
+                    sh 'hostname -I'
                 }
             }
         }
