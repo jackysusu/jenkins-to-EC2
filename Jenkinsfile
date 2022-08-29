@@ -42,8 +42,7 @@ pipeline {
                 sshagent (credentials: ['ssh-ec2']) {
                     sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
                     sh "ssh ubuntu@18.182.25.165 'sudo apt update -y && \
-                        sudo apt install awscli -y \
-                        sh ./deploy.sh'"
+                        sudo apt install awscli -y'"
                 }
             }
         }
