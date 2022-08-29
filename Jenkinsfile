@@ -11,7 +11,6 @@ pipeline {
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 	registryCredential = "aws-login"
-    iam = "whoami && pwd && uname -a"
     }
 
     stages {
@@ -42,7 +41,7 @@ pipeline {
             steps {
                 sshagent (credentials: ['ssh-ec2']) {
                     sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
-                    sh "ssh ubuntu@18.182.25.165 /bin/bash '${iam}'"
+                    sh "ssh ubuntu@18.182.25.165 /bin/bash 'whoami && pwd && uname -a'"
                 }
             }
         }
