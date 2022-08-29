@@ -38,11 +38,12 @@ pipeline {
 
         //SSH connect to ec2 instance
         stage('ssh to ec2') {
+            def iam = "whoami && pwd && uname -a"
             steps {
-                def whoami = "whoami && pwd && uname -a"
+                
                 sshagent (credentials: ['ssh-ec2']) {
                     sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
-                    sh "ssh ubuntu@18.182.25.165 /bin/bash '${whoami}'"
+                    sh "ssh ubuntu@18.182.25.165 /bin/bash '${iam}'"
                 }
             }
         }
