@@ -41,6 +41,8 @@ pipeline {
         stage('uploade file and deploy') {
             steps {
                 sh 'sed -i "s#IMAGE_TAG#$IMAGE_TAG#g" deploy.sh'
+                sh 'sed -i "s#REPOSITORY_URI#$REPOSITORY_URI#g" deploy.sh'
+                sh 'sed -i "s#AWS_DEFAULT_REGION#$AWS_DEFAULT_REGION#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
                     sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
