@@ -38,7 +38,7 @@ pipeline {
         }
 
         //SSH connect to ec2 instance
-        stage('uploade file and deploy') {
+        stage('Deploy') {
             steps {
                 sh 'sed -i "s#IMAGE_TAG#$IMAGE_TAG#g" deploy.sh'
                 sh 'sed -i "s#REPOSITORY_URI#$REPOSITORY_URI#g" deploy.sh'
@@ -47,7 +47,6 @@ pipeline {
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
                     //sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
                         //sudo apt install awscli -y' "
-                    sh "ssh ubuntu@${ec2_ip} echo 'chmod deploy.sh'"     
                     sh "ssh ubuntu@${ec2_ip} 'chmod +x deploy.sh'"                        
                     sh "ssh ubuntu@${ec2_ip} 'sudo sh ./deploy.sh'"
                 }
