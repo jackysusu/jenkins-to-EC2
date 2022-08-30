@@ -47,6 +47,7 @@ pipeline {
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
                     //sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
                         //sudo apt install awscli -y' "
+                    sh "ssh ubuntu@1${ec2_ip} sudo chmod +x ./deploy.sh"                        
                     sh "ssh ubuntu@1${ec2_ip} sudo sh ./deploy.sh"
                 }
             }
