@@ -1,5 +1,3 @@
-aws configure set default.region us-east-1; aws configure set aws_access_key_id 'AKIARD4PRF6RAAOJYLN6' ; aws configure set aws_secret_access_key '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' | sudo sh
+aws configure set default.region ap-northeast-1; aws configure set aws_access_key_id 'AKIAZZ3KV7Z73DGFFQFV' ; aws configure set aws_secret_access_key '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' | sudo sh
 aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 077073559458.dkr.ecr.ap-northeast-1.amazonaws.com/nginx
-docker pull 077073559458.dkr.ecr.ap-northeast-1.amazonaws.com/nginx:IMAGE_TAG
-#aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPOSITORY_URI}
-#docker pull ${REPOSITORY_URI}:latest
+docker pull 673996734079.dkr.ecr.ap-northeast-1.amazonaws.com/nginx:IMAGE_TAG

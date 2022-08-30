@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID="077073559458"
+        AWS_ACCOUNT_ID="673996734079"
         AWS_DEFAULT_REGION="ap-northeast-1" 
 	//CLUSTER_NAME="CHANGE_ME"
 	//SERVICE_NAME="CHANGE_ME"
@@ -11,6 +11,7 @@ pipeline {
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 	registryCredential = "aws-login"
+    ec2_ip = "3.112.24.148"
     }
 
     stages {
@@ -37,14 +38,14 @@ pipeline {
         }
 
         //SSH connect to ec2 instance
-        stage('ssh to ec2') {
+        stage('uploade file and deploy') {
             steps {
                 sh 'sed -i "s#IMAGE_TAG#$IMAGE_TAG#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
-                    sh 'scp deploy.sh ubuntu@18.182.25.165:/home/ubuntu'
-                    sh "ssh ubuntu@18.182.25.165 'sudo apt update -y && \
+                    sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
+                    sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
                         sudo apt install awscli -y' "
-                    sh "ssh ubuntu@18.182.25.165 sudo sh ./deploy.sh"
+                    sh "ssh ubuntu@1${ec2_ip} sudo sh ./deploy.sh"
                 }
             }
         }
