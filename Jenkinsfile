@@ -41,7 +41,7 @@ pipeline {
                 sh 'sed -i "s#AWS_DEFAULT_REGION#$AWS_DEFAULT_REGION#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
                     sh "ssh ubuntu@${ec2_ip} 'sudo mkdir .aws'"
-                    sh "ssh ubuntu@${ec2_ip} 'chmod 700 .aws'"
+                    sh "ssh ubuntu@${ec2_ip} 'sudo chmod 700 .aws'"
                     sh "scp /var/lib/jenkins/.aws/config ubuntu@${ec2_ip}:/home/ubuntu/.aws"
                     sh "scp /var/lib/jenkins/.aws/credentials ubuntu@${ec2_ip}:/home/ubuntu/.aws"
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
