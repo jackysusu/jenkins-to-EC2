@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 	registryCredential = "aws-login"
-    ec2_ip = "52.197.251.76"
+    ec2_ip = "54.65.112.66"
     }
 
     stages {
