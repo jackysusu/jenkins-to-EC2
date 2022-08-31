@@ -45,6 +45,8 @@ pipeline {
                     sh "ssh ubuntu@${ec2_ip} 'sudo chmod 777 .aws'"
                     sh "scp /var/lib/jenkins/.aws/config ubuntu@${ec2_ip}:/home/ubuntu/.aws"
                     sh "scp /var/lib/jenkins/.aws/credentials ubuntu@${ec2_ip}:/home/ubuntu/.aws"
+                    sh "ssh ubuntu@${ec2_ip} 'sudo chmod +x ~/.aws/config'"
+                    sh "ssh ubuntu@${ec2_ip} 'sudo chmod +x ~/.aws/credentials'"
                     sh "ssh ubuntu@${ec2_ip} 'sudo chmod 700 .aws'"
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
                     sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
