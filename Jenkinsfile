@@ -1,17 +1,13 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCOUNT_ID="673996734079"
+        AWS_ACCOUNT_ID="077073559458"
         AWS_DEFAULT_REGION="ap-northeast-1" 
-	//CLUSTER_NAME="CHANGE_ME"
-	//SERVICE_NAME="CHANGE_ME"
-	//TASK_DEFINITION_NAME="CHANGE_ME"
-	//DESIRED_COUNT="CHANGE_ME"
         IMAGE_REPO_NAME="nginx"
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
-	registryCredential = "jackysusu_aws_key"
-    ec2_ip = "3.112.24.148"
+	registryCredential = "aws-login"
+    ec2_ip = "52.197.251.76"
     }
 
     stages {
@@ -44,9 +40,11 @@ pipeline {
                 sh 'sed -i "s#REPOSITORY_URI#$REPOSITORY_URI#g" deploy.sh'
                 sh 'sed -i "s#AWS_DEFAULT_REGION#$AWS_DEFAULT_REGION#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
+                    sh "scp /var/lib/jenkins/.aws/config ubuntu@${ec2_ip}:/home/ubuntu/.aws"
+                    sh "scp /var/lib/jenkins/.aws/credentials ubuntu@${ec2_ip}:/home/ubuntu/.aws"
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
-                    //sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
-                        //sudo apt install awscli -y' "
+                    sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
+                        sudo apt install awscli -y' "
                     sh "ssh ubuntu@${ec2_ip} 'chmod +x deploy.sh'"                        
                     sh "ssh ubuntu@${ec2_ip} 'sudo sh ./deploy.sh'"
                 }
