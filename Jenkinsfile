@@ -49,12 +49,5 @@ pipeline {
                 }
             }
         }
-
-        //Deploy images to EC2 Instance
-        //stage('Deploy Script on EC2'){
-            //steps{
-
-            //}
-        //}
     }
 }
