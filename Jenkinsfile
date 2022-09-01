@@ -40,11 +40,7 @@ pipeline {
                 sh 'sed -i "s#REPOSITORY_URI#$REPOSITORY_URI#g" deploy.sh'
                 sh 'sed -i "s#AWS_DEFAULT_REGION#$AWS_DEFAULT_REGION#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
-                    //sh "ssh ubuntu@${ec2_ip} 'sudo mkdir -p .docker'"
-                    //sh "ssh ubuntu@${ec2_ip} 'sudo chown ubuntu:ubuntu .docker'"
-                    //sh "ssh ubuntu@${ec2_ip} 'sudo chmod 770 .docker'"
-                    //sh "scp /var/lib/jenkins/.docker/config.json ubuntu@${ec2_ip}:/home/ubuntu/.docker"
-                    //sh "ssh ubuntu@${ec2_ip} 'sudo chmod 400 .docker'"
+                    sh "scp /var/lib/jenkins/.aws/ ubuntu@${ec2_ip}:/home/ubuntu/.aws"
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
                     //sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
                         //sudo apt install awscli -y' "
