@@ -7,7 +7,7 @@ pipeline {
         IMAGE_TAG="${env.BUILD_ID}"
         REPOSITORY_URI = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}"
 	registryCredential = "aws-login"
-    ec2_ip = "54.65.112.66"
+    ec2_ip = "35.79.228.201"
     }
 
     stages {
@@ -40,11 +40,11 @@ pipeline {
                 sh 'sed -i "s#REPOSITORY_URI#$REPOSITORY_URI#g" deploy.sh'
                 sh 'sed -i "s#AWS_DEFAULT_REGION#$AWS_DEFAULT_REGION#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
-                    sh "ssh ubuntu@${ec2_ip} 'sudo mkdir -p .docker'"
-                    sh "ssh ubuntu@${ec2_ip} 'sudo chown ubuntu:ubuntu .docker'"
-                    sh "ssh ubuntu@${ec2_ip} 'sudo chmod 777 .docker'"
-                    sh "scp /var/lib/jenkins/.docker/config.json ubuntu@${ec2_ip}:/home/ubuntu/.docker"
-                    sh "ssh ubuntu@${ec2_ip} 'sudo chmod 400 .docker'"
+                    //sh "ssh ubuntu@${ec2_ip} 'sudo mkdir -p .docker'"
+                    //sh "ssh ubuntu@${ec2_ip} 'sudo chown ubuntu:ubuntu .docker'"
+                    //sh "ssh ubuntu@${ec2_ip} 'sudo chmod 777 .docker'"
+                    //sh "scp /var/lib/jenkins/.docker/config.json ubuntu@${ec2_ip}:/home/ubuntu/.docker"
+                    //sh "ssh ubuntu@${ec2_ip} 'sudo chmod 400 .docker'"
                     sh "scp deploy.sh ubuntu@${ec2_ip}:/home/ubuntu"
                     sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
                         sudo apt install awscli -y' "
