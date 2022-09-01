@@ -40,7 +40,7 @@ pipeline {
                 sh 'sed -i "s#REPOSITORY_URI#$REPOSITORY_URI#g" deploy.sh'
                 sh 'sed -i "s#AWS_DEFAULT_REGION#$AWS_DEFAULT_REGION#g" deploy.sh'
                 sshagent (credentials: ['ssh-ec2']) {
-                    sh "ssh whoami"
+                    sh "ssh 'whoami'"
                     sh "ssh ubuntu@${ec2_ip} 'sudo mkdir -p .docker'"
                     sh "ssh ubuntu@${ec2_ip} 'sudo chown ubuntu:ubuntu .docker'"
                     sh "ssh ubuntu@${ec2_ip} 'sudo chmod 770 .docker'"
