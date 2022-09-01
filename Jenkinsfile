@@ -49,7 +49,7 @@ pipeline {
                     //sh "ssh ubuntu@${ec2_ip} 'sudo apt update -y && \
                         //sudo apt install awscli -y' "
                     sh "ssh ubuntu@${ec2_ip} 'chmod +x deploy.sh'"                        
-                    sh "ssh ubuntu@${ec2_ip} 'sudo sh ./deploy.sh'"
+                    sh "ssh ubuntu@${ec2_ip} 'sh ./deploy.sh'"
                 }
             }
         }
