@@ -1,4 +1,4 @@
-# jenkinsfile 12345
+# jenkinsfile
 CI/CD deploy to EC2 instance
 
 1.Build image to jenkinserver (localhost)
